@@ -1,6 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.1.3.RELEASE'
 	id 'java'
+	id 'jacoco'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -24,8 +25,15 @@ dependencies {
 	compile 'io.springfox:springfox-spring-webflux:3.0.0-SNAPSHOT'
 	compile 'io.springfox:springfox-bean-validators:3.0.0-SNAPSHOT'
 
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation('org.junit.jupiter:junit-jupiter-api:5.2.0')
+	testCompile('org.junit.jupiter:junit-jupiter-params:5.2.0')
+	testRuntime('org.junit.jupiter:junit-jupiter-engine:5.2.0')
+	testCompile('org.mockito:mockito-junit-jupiter:2.18.3')
+	testCompile "org.mockito:mockito-core:2.18.3"
 	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'junit', module: 'junit'
+	}
 }
 
 springBoot {
@@ -34,4 +42,16 @@ springBoot {
 
 bootRun {
 	systemProperties = System.properties
+}
+
+test {
+	useJUnitPlatform()
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled false
+		csv.enabled false
+		html.destination file("${buildDir}/jacocoHtml")
+	}
 }
