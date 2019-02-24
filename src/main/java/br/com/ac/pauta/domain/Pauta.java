@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -19,6 +20,15 @@ public class Pauta {
     private String id;
     private String titulo;
     private SessaoVotacao sessaoVotacao;
+
+    public Pauta() {
+    }
+
+    public Pauta(String id, String titulo, SessaoVotacao sessaoVotacao) {
+        this.id = id;
+        this.titulo = titulo;
+        this.sessaoVotacao = sessaoVotacao;
+    }
 
     public SessaoVotacao getSessaoVotacao() {
         return sessaoVotacao;
@@ -50,4 +60,27 @@ public class Pauta {
                 .orElse(null);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pauta pauta = (Pauta) o;
+        return Objects.equals(id, pauta.id) &&
+                Objects.equals(titulo, pauta.titulo) &&
+                Objects.equals(sessaoVotacao, pauta.sessaoVotacao);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, titulo, sessaoVotacao);
+    }
+
+    @Override
+    public String toString() {
+        return "Pauta{" +
+                "id='" + id + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", sessaoVotacao=" + sessaoVotacao +
+                '}';
+    }
 }

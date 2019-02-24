@@ -5,6 +5,7 @@ import br.com.ac.pauta.exception.EleitorJaVotouException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -28,5 +29,25 @@ class Votos {
     Map<OpcaoVoto, Long> getResultadoVotacao() {
         return valores.stream()
                 .collect(Collectors.groupingBy(Voto::getOpcaoVoto, Collectors.counting()));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Votos votos = (Votos) o;
+        return Objects.equals(valores, votos.valores);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(valores);
+    }
+
+    @Override
+    public String toString() {
+        return "Votos{" +
+                "valores=" + valores +
+                '}';
     }
 }
