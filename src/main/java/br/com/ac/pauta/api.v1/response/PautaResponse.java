@@ -20,6 +20,38 @@ public class PautaResponse {
     @ApiModelProperty(value = "Resultado consolidado da votação, exibindo o total por opção.", example = "SIM: 1")
     private Map<OpcaoVoto, Long> resultadoVotacao;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public boolean isFinalizada() {
+        return finalizada;
+    }
+
+    public void setFinalizada(boolean finalizada) {
+        this.finalizada = finalizada;
+    }
+
+    public Map<OpcaoVoto, Long> getResultadoVotacao() {
+        return resultadoVotacao;
+    }
+
+    public void setResultadoVotacao(Map<OpcaoVoto, Long> resultadoVotacao) {
+        this.resultadoVotacao = resultadoVotacao;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

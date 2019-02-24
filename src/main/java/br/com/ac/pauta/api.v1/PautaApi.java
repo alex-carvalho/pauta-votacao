@@ -80,8 +80,8 @@ public class PautaApi {
 
     @PostMapping("/{idPauta}/votar")
     @ApiOperation(value = "Realiza o voto na pauta especificada.")
-    public Mono<ResponseEntity> abrirSessaoVotacao(@PathVariable("idPauta") String idPauta,
-                                                   @RequestBody @Valid VotoRequest votoRequest) {
+    public Mono<ResponseEntity> votar(@PathVariable("idPauta") String idPauta,
+                                      @RequestBody @Valid VotoRequest votoRequest) {
         return pautaService.votar(idPauta, objectMapper.convertValue(votoRequest, Voto.class))
                 .map(it -> (ResponseEntity) ResponseEntity.ok().build())
                 .doOnSuccess(it -> logger.info("Sessão iniciado com sucesso."));

@@ -30,6 +30,26 @@ public class Pauta {
         this.sessaoVotacao = sessaoVotacao;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setSessaoVotacao(SessaoVotacao sessaoVotacao) {
+        this.sessaoVotacao = sessaoVotacao;
+    }
+
     public SessaoVotacao getSessaoVotacao() {
         return sessaoVotacao;
     }
