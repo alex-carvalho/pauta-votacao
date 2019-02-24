@@ -1,4 +1,4 @@
 spring:
   data:
     mongodb:
-      uri: "mongodb://localhost:27017/pauta"
+      uri: "${MONGO_URI:mongodb://localhost:27017/pauta}"

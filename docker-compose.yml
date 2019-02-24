@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+  pauta:
+    build: .
+    restart: always
+    container_name: pauta-service
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/pauta
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    container_name: mongo-pauta
+    volumes:
+      - mongo-data:/data/db
+    restart: always
+
+volumes:
+  mongo-data:

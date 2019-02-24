@@ -15,7 +15,7 @@ public class VotoRequest {
     @ApiModelProperty(value = "Identificador do eleitor.")
     private String idEleitor;
     @NotNull
-    @ApiModelProperty(value = "Opção do voto, sim ou não.", example = "SIM, NAO")
+    @ApiModelProperty(value = "Opção do voto, sim ou não.")
     private OpcaoVoto opcaoVoto;
 
     @Override

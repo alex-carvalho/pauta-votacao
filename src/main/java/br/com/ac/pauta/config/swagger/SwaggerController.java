@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 /**
@@ -42,9 +43,9 @@ public class SwaggerController {
     }
 
     private String loadTemplate() throws IOException {
-        File templateFile = homeTemplate.getFile();
+        InputStream inputStream = homeTemplate.getInputStream();
 
-        template = new String(Files.readAllBytes(templateFile.toPath()), Charset.forName("UTF-8"));
+        template = new BufferedReader(new InputStreamReader(inputStream)).lines().collect(Collectors.joining("\n"));
 
         template = buildProperties.map(entries -> template
                 .replace("$version", entries.getVersion())
