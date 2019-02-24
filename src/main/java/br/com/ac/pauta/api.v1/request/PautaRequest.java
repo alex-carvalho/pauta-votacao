@@ -1,5 +1,6 @@
 package br.com.ac.pauta.api.v1.request;
 
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
@@ -7,6 +8,7 @@ import java.util.Objects;
  */
 public class PautaRequest {
 
+    @NotNull
     private String titulo;
 
     @Override

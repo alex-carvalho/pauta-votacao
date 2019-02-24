@@ -7,10 +7,12 @@ import java.util.Objects;
  */
 public class ErrorResponse {
 
-    private String message;
+    private final String message;
+    private final String detalhe;
 
-    public ErrorResponse(String message) {
+    public ErrorResponse(String message, String detalhe) {
         this.message = message;
+        this.detalhe = detalhe;
     }
 
     @Override
@@ -18,18 +20,20 @@ public class ErrorResponse {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ErrorResponse that = (ErrorResponse) o;
-        return Objects.equals(message, that.message);
+        return Objects.equals(message, that.message) &&
+                Objects.equals(detalhe, that.detalhe);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(message);
+        return Objects.hash(message, detalhe);
     }
 
     @Override
     public String toString() {
         return "ErrorResponse{" +
                 "message='" + message + '\'' +
+                ", detalhe='" + detalhe + '\'' +
                 '}';
     }
 }

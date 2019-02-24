@@ -21,11 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import javax.validation.Valid;
+
 /**
  * @author Alex Carvalho
  */
 @RestController
-@RequestMapping("/pautas")
+@RequestMapping("/v1/pautas")
 public class PautaApi {
 
     private final Logger logger = LoggerFactory.getLogger(PautaApi.class);
@@ -53,7 +55,7 @@ public class PautaApi {
     }
 
     @PostMapping
-    public Mono<ResponseEntity<PautaResponse>> criarPauta(@RequestBody PautaRequest pautaRequest) {
+    public Mono<ResponseEntity<PautaResponse>> criarPauta(@RequestBody @Valid PautaRequest pautaRequest) {
         return pautaService
                 .criarPauta(objectMapper.convertValue(pautaRequest, Pauta.class))
                 .map(pauta -> objectMapper.convertValue(pauta, PautaResponse.class))
@@ -71,7 +73,7 @@ public class PautaApi {
 
     @PostMapping("/{idPauta}/votar")
     public Mono<ResponseEntity> abrirSessaoVotacao(@PathVariable("idPauta") String idPauta,
-                                                   @RequestBody VotoRequest votoRequest) {
+                                                   @RequestBody @Valid VotoRequest votoRequest) {
         return pautaService.votar(idPauta, objectMapper.convertValue(votoRequest, Voto.class))
                 .map(it -> (ResponseEntity) ResponseEntity.ok().build())
                 .doOnSuccess(it -> logger.info("Sessão iniciado com sucesso."));
