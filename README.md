@@ -1,4 +1,6 @@
 # Pautas para Votação
+[![Build Status](https://travis-ci.org/alex-carvalho/pauta-votacao.svg?branch=master)](https://travis-ci.org/alex-carvalho/pauta-votacao)
+[![codecov](https://codecov.io/gh/alex-carvalho/pauta-votacao/branch/master/graph/badge.svg)](https://codecov.io/gh/alex-carvalho/pauta-votacao)
 
 ### Projeto com apis REST com o seguinte escopo:
 - Cadastro de pautas;
