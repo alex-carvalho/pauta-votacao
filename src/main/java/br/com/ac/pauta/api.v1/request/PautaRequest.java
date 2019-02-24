@@ -1,5 +1,7 @@
 package br.com.ac.pauta.api.v1.request;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
@@ -9,6 +11,7 @@ import java.util.Objects;
 public class PautaRequest {
 
     @NotNull
+    @ApiModelProperty(value = "Título da pauta.")
     private String titulo;
 
     @Override

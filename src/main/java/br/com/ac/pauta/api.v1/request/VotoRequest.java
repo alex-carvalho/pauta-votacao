@@ -1,6 +1,7 @@
 package br.com.ac.pauta.api.v1.request;
 
 import br.com.ac.pauta.domain.OpcaoVoto;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
@@ -11,8 +12,10 @@ import java.util.Objects;
 public class VotoRequest {
 
     @NotNull
+    @ApiModelProperty(value = "Identificador do eleitor.")
     private String idEleitor;
     @NotNull
+    @ApiModelProperty(value = "Opção do voto, sim ou não.", example = "SIM, NAO")
     private OpcaoVoto opcaoVoto;
 
     @Override

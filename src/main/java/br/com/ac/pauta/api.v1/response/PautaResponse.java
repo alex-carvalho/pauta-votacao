@@ -1,6 +1,7 @@
 package br.com.ac.pauta.api.v1.response;
 
 import br.com.ac.pauta.domain.OpcaoVoto;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Map;
 import java.util.Objects;
@@ -10,9 +11,13 @@ import java.util.Objects;
  */
 public class PautaResponse {
 
+    @ApiModelProperty(value = "Identificador da pauta.")
     private String id;
+    @ApiModelProperty(value = "Titulo da pauta.")
     private String titulo;
+    @ApiModelProperty(value = "Indicativo se a pauta já foi finalizada.")
     private boolean finalizada;
+    @ApiModelProperty(value = "Resultado consolidado da votação, exibindo o total por opção.", example = "SIM: 1")
     private Map<OpcaoVoto, Long> resultadoVotacao;
 
     @Override

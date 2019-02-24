@@ -8,6 +8,8 @@ import br.com.ac.pauta.domain.Pauta;
 import br.com.ac.pauta.domain.Voto;
 import br.com.ac.pauta.service.PautaService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -28,6 +30,7 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/v1/pautas")
+@Api(description = "Api para gerenciamento de pautas.")
 public class PautaApi {
 
     private final Logger logger = LoggerFactory.getLogger(PautaApi.class);
@@ -41,6 +44,7 @@ public class PautaApi {
     }
 
     @GetMapping
+    @ApiOperation(value = "Retorna uma lista de todas as pautas.", response = PautaResponse[].class)
     public Flux<PautaResponse> getPautas() {
         return pautaService.getPautas()
                 .map(pauta -> objectMapper.convertValue(pauta, PautaResponse.class))
@@ -48,6 +52,7 @@ public class PautaApi {
     }
 
     @GetMapping("/{idPauta}")
+    @ApiOperation(value = "Retorna uma pauta especifica.", response = PautaResponse.class)
     public Mono<PautaResponse> getPauta(@PathVariable("idPauta") String idPauta) {
         return pautaService.getPauta(idPauta)
                 .map(pauta -> objectMapper.convertValue(pauta, PautaResponse.class))
@@ -55,6 +60,7 @@ public class PautaApi {
     }
 
     @PostMapping
+    @ApiOperation(value = "Cria uma nova pauta.", response = PautaResponse.class)
     public Mono<ResponseEntity<PautaResponse>> criarPauta(@RequestBody @Valid PautaRequest pautaRequest) {
         return pautaService
                 .criarPauta(objectMapper.convertValue(pautaRequest, Pauta.class))
@@ -64,6 +70,7 @@ public class PautaApi {
     }
 
     @PostMapping("/{idPauta}/abrir-sessao")
+    @ApiOperation(value = "Inicia uma sessão na pauta especificada.")
     public Mono<ResponseEntity> abrirSessaoVotacao(@PathVariable("idPauta") String idPauta,
                                                    @RequestBody AbrirSessaoRequest abrirSessaoRequest) {
         return pautaService.abrirSessaoVotacao(idPauta, abrirSessaoRequest.getFinalSessao())
@@ -72,6 +79,7 @@ public class PautaApi {
     }
 
     @PostMapping("/{idPauta}/votar")
+    @ApiOperation(value = "Realiza o voto na pauta especificada.")
     public Mono<ResponseEntity> abrirSessaoVotacao(@PathVariable("idPauta") String idPauta,
                                                    @RequestBody @Valid VotoRequest votoRequest) {
         return pautaService.votar(idPauta, objectMapper.convertValue(votoRequest, Voto.class))
