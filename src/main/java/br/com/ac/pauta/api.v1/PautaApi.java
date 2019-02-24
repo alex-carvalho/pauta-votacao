@@ -46,6 +46,7 @@ public class PautaApi {
     @GetMapping
     @ApiOperation(value = "Retorna uma lista de todas as pautas.", response = PautaResponse[].class)
     public Flux<PautaResponse> getPautas() {
+        logger.info("Buscando todas as pautas.");
         return pautaService.getPautas()
                 .map(pauta -> objectMapper.convertValue(pauta, PautaResponse.class))
                 .doOnComplete(() -> logger.info("Retornando lista de pautas."));
@@ -54,6 +55,7 @@ public class PautaApi {
     @GetMapping("/{idPauta}")
     @ApiOperation(value = "Retorna uma pauta especifica.", response = PautaResponse.class)
     public Mono<PautaResponse> getPauta(@PathVariable("idPauta") String idPauta) {
+        logger.info("Bucando pauta {}.", idPauta);
         return pautaService.getPauta(idPauta)
                 .map(pauta -> objectMapper.convertValue(pauta, PautaResponse.class))
                 .doOnSuccess(it -> logger.info("Retornando pauta especifica."));
@@ -62,6 +64,7 @@ public class PautaApi {
     @PostMapping
     @ApiOperation(value = "Cria uma nova pauta.", response = PautaResponse.class)
     public Mono<ResponseEntity<PautaResponse>> criarPauta(@RequestBody @Valid PautaRequest pautaRequest) {
+        logger.info("Chamada para criar pauta: {}.", pautaRequest);
         return pautaService
                 .criarPauta(objectMapper.convertValue(pautaRequest, Pauta.class))
                 .map(pauta -> objectMapper.convertValue(pauta, PautaResponse.class))
@@ -73,6 +76,7 @@ public class PautaApi {
     @ApiOperation(value = "Inicia uma sessão na pauta especificada.")
     public Mono<ResponseEntity> abrirSessaoVotacao(@PathVariable("idPauta") String idPauta,
                                                    @RequestBody AbrirSessaoRequest abrirSessaoRequest) {
+        logger.info("Pauta {} tentativa de abertura de sessão {}.", idPauta, abrirSessaoRequest);
         return pautaService.abrirSessaoVotacao(idPauta, abrirSessaoRequest.getFinalSessao())
                 .map(it -> (ResponseEntity) ResponseEntity.ok().build())
                 .doOnSuccess(it -> logger.info("Sessão iniciado com sucesso."));
@@ -82,9 +86,10 @@ public class PautaApi {
     @ApiOperation(value = "Realiza o voto na pauta especificada.")
     public Mono<ResponseEntity> votar(@PathVariable("idPauta") String idPauta,
                                       @RequestBody @Valid VotoRequest votoRequest) {
+        logger.info("Pauta {} adicionando voto {}.", idPauta, votoRequest);
         return pautaService.votar(idPauta, objectMapper.convertValue(votoRequest, Voto.class))
                 .map(it -> (ResponseEntity) ResponseEntity.ok().build())
-                .doOnSuccess(it -> logger.info("Sessão iniciado com sucesso."));
+                .doOnSuccess(it -> logger.info("Voto adicionado com sucesso."));
     }
 
 }

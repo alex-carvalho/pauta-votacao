@@ -5,6 +5,9 @@ import br.com.ac.pauta.domain.SessaoVotacao;
 
 import java.time.Instant;
 
+/**
+ * @author Alex Carvalho
+ */
 public class PautaStub {
 
     public static Pauta criarPautaSemSessao() {

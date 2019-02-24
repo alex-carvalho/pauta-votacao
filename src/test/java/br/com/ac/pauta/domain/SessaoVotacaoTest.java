@@ -8,6 +8,9 @@ import java.time.temporal.ChronoUnit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * @author Alex Carvalho
+ */
 class SessaoVotacaoTest {
 
     @Test

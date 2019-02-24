@@ -29,6 +29,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * @author Alex Carvalho
+ */
 @ExtendWith(MockitoExtension.class)
 class PautaServiceTest {
 

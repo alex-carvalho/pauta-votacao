@@ -19,7 +19,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-
+/**
+ * @author Alex Carvalho
+ */
 @ExtendWith(MockitoExtension.class)
 class PautaApiTest {
 
@@ -51,7 +53,6 @@ class PautaApiTest {
 
     @Test
     void getPauta() {
-
         when(pautaService.getPauta(anyString())).thenReturn(Mono.just(PautaStub.criarPautaSemSessao()));
 
         webTestClient.get()
